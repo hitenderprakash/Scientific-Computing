@@ -1,28 +1,20 @@
-#makefile 
-COMPILER=gcc
-CFLAG= -lm
+include make.inc
 
-# "make" command will only compile the code
-all:
-	@$(COMPILER) norm1.c -c
-	@$(COMPILER) norm2.c -c
-	@$(COMPILER) norminf.c -c
-	@$(COMPILER) main.c -c
-	@$(COMPILER) main.o norm1.o norm2.o norminf.o -o main.out $(CFLAG)
+# You may need to modify this makefile to include libraries and/or include files for
+# things like max() or other utilities. To do that, edit the file make.inc and near
+# the bottom define INCS and/or LIBS as needed.
 
+%.o: %.cpp
+	$(CC) $(OPTS) $(INCS) -c $<
+%.mod: %.cpp
+	$(CC) $(OPTS) $(INCS) -c $<
 
-# "make run" command will compile ad run the code
-# only one file will compile and run @#@ represented commented out lines and will not print to screen
-run:
-	@$(COMPILER) norm1.c -c
-	@$(COMPILER) norm2.c -c
-	@$(COMPILER) norminf.c -c
-	@$(COMPILER) main.c -c
-	@$(COMPILER) main.o norm1.o norm2.o norminf.o -o main.out $(CFLAG)
-	@ ./main.out
+go: main.o norm1.o norm2.o norminf.o
+	$(CC) $(OPTS) $(INCS) -o $@ $^  $(LIBS)
 
-# "make clean" will remove the executable. Redirection used to supress error on console	
 clean:
-	@rm -rf *.out
-	@rm -rf *.o
+	rm -f go *.o *.mod *.out
 
+# Beware: this will also remove the results files.
+kleen:
+	rm -f go *.o *.mod *.out results
