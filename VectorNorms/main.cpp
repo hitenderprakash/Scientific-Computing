@@ -34,7 +34,7 @@ int main () {
 	//cout<<"\nnstart: "<<nstart <<" nend: "<<nend<<" nstride: "<<nstride<<" nflops: "<<nflops;
 	
 	vector<string> result_str;
-	double clock_rate=cpuClockRate();
+	//double clock_rate=cpuClockRate();
 	double start;
 	double finish;
 	double elapsed;
@@ -49,13 +49,15 @@ int main () {
 		int repCount;		
 		repCount=(nflops/(2*loopCount));
 		int temp=repCount;
-		start=rdtsc();
+		start=elapsedtime();
+		//start=rdtsc();
 		while(temp>=0){
 			double norm_1=norm1(loopCount,x);
 			temp--;
 		}
-		finish=rdtsc();
-		elapsed=(finish-start)/clock_rate;
+		finish=elapsedtime();
+		//finish=rdtsc();
+		elapsed=(finish-start);
 		result_str.push_back(norms::to_string(loopCount)+ "\t"+ norms::to_string((double)elapsed/repCount)+"\t"+norms::to_string(repCount)+"\t1\n");	
 		//result_str.push_back(norms::to_string(loopCount)+ "\t" + norms::to_string(elapsed)+"\t"+ norms::to_string((double)elapsed/repCount)+"\t"+norms::to_string(repCount)+"\t1\n");
 		//cout<<"\nTime for norm1: "<<n1_t;
@@ -64,13 +66,13 @@ int main () {
 		//measure norm2
 		repCount=(nflops/(2*loopCount+1));
 		temp= repCount;
-		start=rdtsc();
+		start=elapsedtime();
 		while(temp>=0){
 			double norm_2=norm1(loopCount,x);
 			temp--;
 		}
-		finish=rdtsc();
-		elapsed=(finish-start)/clock_rate;
+		finish=elapsedtime();
+		elapsed=(finish-start);
 		result_str.push_back(norms::to_string(loopCount)+ "\t" + norms::to_string((double)elapsed/repCount)+"\t"+ norms::to_string(repCount)+"\t2\n");
 		//result_str.push_back(norms::to_string(loopCount)+ "\t" + norms::to_string(elapsed)+"\t" + norms::to_string((double)elapsed/repCount)+"\t"+ norms::to_string(repCount)+"\t2\n");
 		//cout<<"\nTime for norm2: "<<n2_t;
@@ -79,13 +81,13 @@ int main () {
 		//measure norm1
 		repCount=(nflops/(2*loopCount));
 		temp=(long)repCount;
-		start=rdtsc();
+		start=elapsedtime();
 		while(temp>=0){
 			double norm_inf=norminf(loopCount,x);
 			temp--;
 		}
-		finish=rdtsc();
-		elapsed=(finish-start)/clock_rate;
+		finish=elapsedtime();
+		elapsed=(finish-start);
 		result_str.push_back(norms::to_string(loopCount)+ "\t" +  norms::to_string((double)elapsed/repCount)+"\t"+ norms::to_string(repCount)+"\t3\n");
 		//result_str.push_back(norms::to_string(loopCount)+ "\t" + norms::to_string(elapsed)+"\t" +  norms::to_string((double)elapsed/repCount)+"\t"+ norms::to_string(repCount)+"\t3\n");
 		//cout<<"\nTime for norm inf: "<<ninf_t;
