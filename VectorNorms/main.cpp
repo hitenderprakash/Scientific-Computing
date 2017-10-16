@@ -56,7 +56,8 @@ int main () {
 		}
 		finish=rdtsc();
 		elapsed=(finish-start)/clock_rate;
-		result_str.push_back(norms::to_string(loopCount)+ "\t" + norms::to_string(elapsed)+"\t"+ norms::to_string((double)elapsed/repCount)+"\t"+norms::to_string(repCount)+"\t1\n");	
+		result_str.push_back(norms::to_string(loopCount)+ "\t"+ norms::to_string((double)elapsed/repCount)+"\t"+norms::to_string(repCount)+"\t1\n");	
+		//result_str.push_back(norms::to_string(loopCount)+ "\t" + norms::to_string(elapsed)+"\t"+ norms::to_string((double)elapsed/repCount)+"\t"+norms::to_string(repCount)+"\t1\n");
 		//cout<<"\nTime for norm1: "<<n1_t;
 		//================================
 		
@@ -70,7 +71,8 @@ int main () {
 		}
 		finish=rdtsc();
 		elapsed=(finish-start)/clock_rate;
-		result_str.push_back(norms::to_string(loopCount)+ "\t" + norms::to_string(elapsed)+"\t" + norms::to_string((double)elapsed/repCount)+"\t"+ norms::to_string(repCount)+"\t2\n");
+		result_str.push_back(norms::to_string(loopCount)+ "\t" + norms::to_string((double)elapsed/repCount)+"\t"+ norms::to_string(repCount)+"\t2\n");
+		//result_str.push_back(norms::to_string(loopCount)+ "\t" + norms::to_string(elapsed)+"\t" + norms::to_string((double)elapsed/repCount)+"\t"+ norms::to_string(repCount)+"\t2\n");
 		//cout<<"\nTime for norm2: "<<n2_t;
 		//================================
 		
@@ -84,7 +86,8 @@ int main () {
 		}
 		finish=rdtsc();
 		elapsed=(finish-start)/clock_rate;
-		result_str.push_back(norms::to_string(loopCount)+ "\t" + norms::to_string(elapsed)+"\t" +  norms::to_string((double)elapsed/repCount)+"\t"+ norms::to_string(repCount)+"\t3\n");
+		result_str.push_back(norms::to_string(loopCount)+ "\t" +  norms::to_string((double)elapsed/repCount)+"\t"+ norms::to_string(repCount)+"\t3\n");
+		//result_str.push_back(norms::to_string(loopCount)+ "\t" + norms::to_string(elapsed)+"\t" +  norms::to_string((double)elapsed/repCount)+"\t"+ norms::to_string(repCount)+"\t3\n");
 		//cout<<"\nTime for norm inf: "<<ninf_t;
 		//================================
 	}
