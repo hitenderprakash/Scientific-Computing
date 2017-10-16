@@ -26,6 +26,8 @@ int main () {
 	ifstream infile;
 	infile.open("sizes");
 	string line;
+	if(!infile){cout<<"\nError in reading input file: sizez, make sure file exists in current directory. Exiting !";exit(0);}
+	else if(infile.peek() == std::ifstream::traits_type::eof()){cout<<"\nError in reading input file: sizez, file is empty. Exiting !";exit(0);} 
 	while(getline(infile, line)){
 		istringstream isobj(line);
 		if(!(isobj >> nstart >>nstride >> nend >> nflops)){break;}
@@ -33,65 +35,66 @@ int main () {
 	infile.close();
 	//cout<<"\nnstart: "<<nstart <<" nend: "<<nend<<" nstride: "<<nstride<<" nflops: "<<nflops;
 	
-	vector<string> result_str;
-	//double clock_rate=cpuClockRate();
+	vector<string> result_str; //to store result strings
 	double start;
 	double finish;
 	double elapsed;
 
 	int loopCount=0;
 	for(loopCount=nstart;loopCount<=nend;loopCount+=nstride){
-		vector<double> x(loopCount,0);
+		//vector<double> x(loopCount,0);
+		double *x=new double[loopCount];
+		if(!x){cout<<"\nError: Memory allocation for array failed ! Exiting..";exit(0);}
 		for(int i=0;i<loopCount;i++){
 			x[i]=rand();
+			//x[i]=1.0;
 		}
-		//measure norm1
+		//===========measure norm1============
 		int repCount;		
-		repCount=(nflops/(2*loopCount));
+		repCount=nflops/(2*loopCount);
 		int temp=repCount;
 		start=elapsedtime();
 		//start=rdtsc();
 		while(temp>=0){
 			double norm_1=norm1(loopCount,x);
+			//if(temp==0){cout<<"\nNorm1: "<<norm_1;}
 			temp--;
 		}
 		finish=elapsedtime();
 		//finish=rdtsc();
 		elapsed=(finish-start);
 		result_str.push_back(norms::to_string(loopCount)+ "\t"+ norms::to_string((double)elapsed/repCount)+"\t"+norms::to_string(repCount)+"\t1\n");	
-		//result_str.push_back(norms::to_string(loopCount)+ "\t" + norms::to_string(elapsed)+"\t"+ norms::to_string((double)elapsed/repCount)+"\t"+norms::to_string(repCount)+"\t1\n");
-		//cout<<"\nTime for norm1: "<<n1_t;
-		//================================
+		//====================================
 		
-		//measure norm2
-		repCount=(nflops/(2*loopCount+1));
+		//==========measure norm2=============
+		repCount=nflops/(2*loopCount+1);
 		temp= repCount;
 		start=elapsedtime();
 		while(temp>=0){
-			double norm_2=norm1(loopCount,x);
+			double norm_2=norm2(loopCount,x);
+			//if(temp==0){cout<<"\nNorm2: "<<norm_2;}
 			temp--;
 		}
 		finish=elapsedtime();
 		elapsed=(finish-start);
 		result_str.push_back(norms::to_string(loopCount)+ "\t" + norms::to_string((double)elapsed/repCount)+"\t"+ norms::to_string(repCount)+"\t2\n");
-		//result_str.push_back(norms::to_string(loopCount)+ "\t" + norms::to_string(elapsed)+"\t" + norms::to_string((double)elapsed/repCount)+"\t"+ norms::to_string(repCount)+"\t2\n");
-		//cout<<"\nTime for norm2: "<<n2_t;
-		//================================
+		//===================================
 		
-		//measure norm1
-		repCount=(nflops/(2*loopCount));
+		//=========measure norm-inf==========
+		repCount=nflops/(2*loopCount);
 		temp=(long)repCount;
 		start=elapsedtime();
 		while(temp>=0){
 			double norm_inf=norminf(loopCount,x);
+			//if(temp==0){cout<<"\nNorminf: "<<norm_inf;}
 			temp--;
 		}
 		finish=elapsedtime();
 		elapsed=(finish-start);
 		result_str.push_back(norms::to_string(loopCount)+ "\t" +  norms::to_string((double)elapsed/repCount)+"\t"+ norms::to_string(repCount)+"\t3\n");
-		//result_str.push_back(norms::to_string(loopCount)+ "\t" + norms::to_string(elapsed)+"\t" +  norms::to_string((double)elapsed/repCount)+"\t"+ norms::to_string(repCount)+"\t3\n");
-		//cout<<"\nTime for norm inf: "<<ninf_t;
-		//================================
+		//===================================
+		//free the memory
+		delete(x);
 	}
 	
 	//write result file

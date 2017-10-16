@@ -4,19 +4,18 @@
  */
 #include <string>
 #include <sstream>
-#include <vector>
 #include <iomanip>
 
 #ifndef NORMS_H
 #define NORMS_H
 
-double norm1(int n, std::vector<double> &x);
-double norm2(int n, std::vector<double> &x);
-double norminf(int n, std::vector<double> &x);
+double norm1(int n, double *x);
+double norm2(int n, double *x);
+double norminf(int n, double *x);
 double elapsedtime (void);
 
-static __inline__ unsigned long long rdtsc(void);//not using
-double cpuClockRate(); //not using 
+//static __inline__ unsigned long long rdtsc(void);//not using
+//double cpuClockRate(); //not using 
 
 //Custom to_string implementation for getting double value with 17 decimal places precision 
 //Reference: https://stackoverflow.com/questions/12975341/to-string-is-not-a-member-of-std-says-g-mingw 

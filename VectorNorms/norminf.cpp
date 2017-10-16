@@ -4,19 +4,18 @@
  */
 #include <iostream>
 #include <cmath>
-#include <vector>
 // Function to calculate infinity-norm of a vector
 // norminf(int n, double *x) 
 // input: n - size of vector, x - reference of vector
 // output: (double) infinity norm
 using namespace std;
-double norminf(int n, std::vector<double> &x){
-	if(x.size()!=n){ return 0;}
-	double norm_inf=std::abs(x[0]);
+double norminf(int n, double *x){
+	if(!x){ return 0;}
+	double norm_inf=std::fabs(x[0]);
 	for(int i=1;i<n;i++){
-		double temp=std::abs(x[i]);
-		norm_inf=(norm_inf > temp)?norm_inf : temp;
-		//norm_inf=(norm_inf > std::abs(x[i]))? norm_inf : std::abs(x[i]); depricating as require abs(x[i]) to calculate two times
+		double temp=std::fabs(x[i]);
+		norm_inf=max(norm_inf,temp);
+		//norm_inf=(norm_inf > temp)?norm_inf : temp;
 	}
 	return norm_inf;
 }

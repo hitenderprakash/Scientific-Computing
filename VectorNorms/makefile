@@ -9,7 +9,7 @@ include make.inc
 %.mod: %.cpp
 	$(CC) $(OPTS) $(INCS) -c $<
 
-go: main.o norm1.o norm2.o norminf.o elapsedtime.o rdtsc.o
+go: main.o norm1.o norm2.o norminf.o elapsedtime.o
 	$(CC) $(OPTS) $(INCS) -o $@ $^  $(LIBS)
 
 clean:
