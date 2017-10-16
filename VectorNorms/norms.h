@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <iomanip>
 #ifndef NORMS_H
 #define NORMS_H
 
@@ -70,14 +71,14 @@ double cpuClockRate(){
 }
 
 
-//if to_string does not work
+//if std::to_string does not work
 // reference: https://stackoverflow.com/questions/12975341/to-string-is-not-a-member-of-std-says-g-mingw 
 namespace norms
 {
     template < typename T > std::string to_string( const T& n )
     {
         std::ostringstream stm ;
-        stm << n ;
+        stm << std::fixed << std::setprecision(17)<< n ;
         return stm.str() ;
     }
 }

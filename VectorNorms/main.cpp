@@ -47,7 +47,7 @@ int main () {
 		}
 		//measure norm1
 		int repCount;		
-		repCount=(nflops/loopCount);
+		repCount=(nflops/(2*loopCount));
 		int temp=repCount;
 		start=rdtsc();
 		while(temp>=0){
@@ -61,7 +61,7 @@ int main () {
 		//================================
 		
 		//measure norm2
-		repCount=(nflops/loopCount)/2.0;
+		repCount=(nflops/(2*loopCount+1));
 		temp= repCount;
 		start=rdtsc();
 		while(temp>=0){
@@ -75,7 +75,7 @@ int main () {
 		//================================
 		
 		//measure norm1
-		repCount=(nflops/loopCount);
+		repCount=(nflops/(2*loopCount));
 		temp=(long)repCount;
 		start=rdtsc();
 		while(temp>=0){
