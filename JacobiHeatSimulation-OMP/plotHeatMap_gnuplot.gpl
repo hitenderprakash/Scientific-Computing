@@ -1,0 +1,20 @@
+# script for gnuplot
+# run as: gnuplot plot.gpl
+# author: Hitender Prakash
+# this gnuplot script requires that a file "results.txt" is present in current directory
+# outputs a file "heat_distribution_map.png" 
+#-----------------------------------
+
+	set pm3d map
+	set pm3d interpolate 5,5
+	#set grid
+	#set pm3d implicit at s
+	set autoscale
+	set title "Heat Distribution Map"
+	set cblabel "Temperature Scale"
+	set term png
+	set output "heat_distribution_map.png"
+	splot 'results.txt' matrix
+
+#-----------------------------------
+#script ends
