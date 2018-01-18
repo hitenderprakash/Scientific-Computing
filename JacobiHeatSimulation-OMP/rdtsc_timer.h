@@ -5,7 +5,7 @@
  * http://www.unix.com/programming/81639-rdtsc-use-c.html
  * 
  */
-
+#include <time.h>
 
 /* rdtsc() function
  * input: NULL
